@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore construction job opportunities. Find the link for your region.">
+  <meta name="theme-color" content="#10251e">
+  <title>Construction Jobs — Need Employees</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17251f;
+      --muted: #5f6f66;
+      --green: #176b4b;
+      --gold: #f4b942;
+      --paper: #f4f6f2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: linear-gradient(145deg, #10251e, #1d4938);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+    }
+
+    main {
+      width: min(100%, 560px);
+      background: var(--paper);
+      border-radius: 24px;
+      padding: clamp(28px, 7vw, 52px);
+      box-shadow: 0 24px 80px #06140e66;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border-radius: 17px;
+      background: #e4efe8;
+      font-size: 29px;
+    }
+
+    .eyebrow {
+      margin: 24px 0 8px;
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 7vw, 3.15rem);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+
+    .intro {
+      margin: 16px 0 26px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    #status {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 14px 16px;
+      border-radius: 13px;
+      background: #e9eee9;
+      color: #33483d;
+      font-size: .94rem;
+    }
+
+    .dot {
+      flex: 0 0 auto;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      to { opacity: .35; }
+    }
+
+    .links {
+      display: none;
+      margin-top: 22px;
+    }
+
+    .links.show {
+      display: grid;
+      gap: 12px;
+    }
+
+    .button {
+      display: block;
+      padding: 15px 18px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 750;
+    }
+
+    .primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .secondary {
+      background: #e3e9e4;
+      color: var(--ink);
+    }
+
+    .small {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: .78rem;
+      line-height: 1.5;
+    }
+
+    noscript p {
+      padding: 12px;
+      background: #fff3d6;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true">🏗️</div>
+    <p class="eyebrow">Construction Careers</p>
+    <h1>Construction Jobs<br>Need Employees</h1>
+    <p class="intro">
+      Find construction job opportunities. We’re checking which link is available for your location.
+    </p>
+
+    <div id="status" role="status" aria-live="polite">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Checking your country…</span>
+    </div>
+
+    <div class="links" id="links">
+      <a class="button primary"
+         href="https://www.af9m8trk.com/UBX12C64/8U7128AR/?s1=direct1">
+        Continue — United States
+      </a>
+      <a class="button secondary"
+         href="https://www.profitableratecpmnetwork.com/un7j3qxxzx?key=7c74aa26b7905c87ec5039c4bf59b0db">
+        Continue — Other countries
+      </a>
+    </div>
+
+    <p class="small">
+      Your location is estimated from your IP address. VPNs, proxies, or location lookup issues can affect the result.
+    </p>
+
+    <noscript>
+      <p>Please enable JavaScript to be directed automatically.</p>
+    </noscript>
+  </main>
+
+  <script>
+    (() => {
+      const links = document.getElementById("links");
+      const status = document.querySelector("#status span:last-child");
+
+      const usa =
+        "https://www.af9m8trk.com/UBX12C64/8U7128AR/?s1=direct1";
+      const other =
+        "https://www.profitableratecpmnetwork.com/un7j3qxxzx?key=7c74aa26b7905c87ec5039c4bf59b0db";
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+
+      fetch("https://ipapi.co/json/", {
+        signal: controller.signal,
+        cache: "no-store"
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Location lookup unavailable");
+          }
+          return response.json();
+        })
+        .then(data => {
+          clearTimeout(timeout);
+
+          if (data.country_code === "US") {
+            status.textContent = "United States detected. Redirecting…";
+            window.location.replace(usa);
+          } else if (
+            typeof data.country_code === "string" &&
+            data.country_code.length === 2
+          ) {
+            status.textContent = "Location detected. Redirecting…";
+            window.location.replace(other);
+          } else {
+            throw new Error("Country could not be identified");
+          }
+        })
+        .catch(() => {
+          clearTimeout(timeout);
+          status.textContent =
+            "We couldn’t identify your location. Choose your region:";
+          links.classList.add("show");
+        });
+    })();
+  </script>
+</body>
+</html>
